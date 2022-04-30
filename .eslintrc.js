@@ -14,6 +14,8 @@ module.exports = {
     semi: ['error', 'never'],
     'max-len': ['error', { code: 140 }],
     'vue/multi-word-component-names': 'off',
-    'object-curly-newline': 'off'
+    'object-curly-newline': 'off',
+    'vuejs-accessibility/form-control-has-label': 'off',
+    'vuejs-accessibility/label-has-for': 'off'
   }
 }
