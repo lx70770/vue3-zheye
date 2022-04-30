@@ -10,7 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onMounted, onUnmounted, watch } from 'vue'
+import useClickOutSide from '../hooks/useClickOutSide'
 
 export default defineComponent({
   name: 'Dropdown',
@@ -26,6 +27,14 @@ export default defineComponent({
     const toggleOpen = () => {
       isOpen.value = !isOpen.value
     }
+
+    const isClickOutside = useClickOutSide(dropdownRef)
+
+    watch(isClickOutside, () => {
+      if (isClickOutside.value && isOpen.value) {
+        isOpen.value = false
+      }
+    })
 
     return {
       isOpen,

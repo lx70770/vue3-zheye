@@ -13,6 +13,7 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     semi: ['error', 'never'],
     'max-len': ['error', { code: 140 }],
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'object-curly-newline': 'off'
   }
 }
