@@ -2,16 +2,20 @@
   <div class="container">
     <GlobalHeader :user="userData" />
     <ColumnList :lists="list" />
-    <form action="">
+    <ValidateForm @form-submit="onFormSubmit">
       <div class="mb-3">
         <label class="form-label">邮箱地址</label>
         <ValidateInput :rules="emailRules" v-model="emailVal" placeholder="请输入邮箱地址" type="text" />
       </div>
       <div class="mb-3">
         <label class="form-label">密码</label>
-        <ValidateInput :rules="emailRules" v-model="emailVal" placeholder="请输入密码" type="password" />
+        <ValidateInput :rules="passwordRules" v-model="passwordVal" placeholder="请输入密码" type="password" />
       </div>
-    </form>
+      <!-- 具名插槽 -->
+      <template #submit>
+        <span class="btn btn-danger">提交</span>
+      </template>
+    </ValidateForm>
   </div>
 </template>
 
@@ -20,6 +24,7 @@ import { defineComponent, ref } from 'vue'
 import GlobalHeader from './components/GlobalHeader.vue'
 import ColumnList, { ColumnProps } from './components/ColumnList.vue'
 import ValidateInput, { RulesProp } from './components/ValidateInput.vue'
+import ValidateForm from './components/ValidateForm.vue'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './global.css'
@@ -65,18 +70,28 @@ const userData = {
 
 export default defineComponent({
   name: 'App',
-  components: { ColumnList, GlobalHeader, ValidateInput },
+  components: { ColumnList, GlobalHeader, ValidateInput, ValidateForm },
   setup() {
-    const emailVal = ref('')
+    const emailVal = ref('123@qq.com')
     const emailRules: RulesProp = [
       { type: 'required', message: '电子邮箱不能为空' },
       { type: 'email', message: '请输入正确的电子邮箱格式' }
     ]
+    const passwordVal = ref('123')
+    const passwordRules: RulesProp = [{ type: 'required', message: '密码不能为空' }]
+
+    const onFormSubmit = (result: any) => {
+      console.log(result)
+    }
+
     return {
       list: testData,
       userData,
       emailRules,
-      emailVal
+      emailVal,
+      passwordRules,
+      passwordVal,
+      onFormSubmit
     }
   }
 })
