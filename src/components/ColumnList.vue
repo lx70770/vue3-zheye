@@ -6,7 +6,7 @@
           <img :src="list.avatar" :alt="list.title" class="card-avatar-img" />
           <h5 class="card-title">{{ list.title }}</h5>
           <p class="card-text text-left">{{ list.description }}</p>
-          <a href="#" class="btn btn-primary">进入专栏</a>
+          <router-link :to="`/column/${list.id}`" class="btn btn-primary">进入专栏</router-link>
         </div>
       </div>
     </div>

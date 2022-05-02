@@ -12,7 +12,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'comma-dangle': ['error', 'never'],
     semi: ['error', 'never'],
-    'max-len': ['error', { code: 140 }],
+    'max-len': ['error', { code: 140, ignoreUrls: true, ignoreStrings: true, ignoreTemplateLiterals: true }],
     'vue/multi-word-component-names': 'off',
     'object-curly-newline': 'off',
     'vuejs-accessibility/form-control-has-label': 'off',
