@@ -6,60 +6,30 @@
           <img src="../assets/callout.svg" alt="callout" class="w-50" />
           <h2 class="font-weight-light">随心写作，自由表达</h2>
           <p>
-            <a href="#" class="btn btn-primary my-2">开始写文章</a>
+            <router-link to="/create" class="btn btn-primary my-2">开始写文章</router-link>
           </p>
         </div>
       </div>
     </section>
-    <h4 class="font-weight-bold text-center">发现精彩 </h4>
+    <h4 class="font-weight-bold text-center">发现精彩</h4>
     <ColumnList :lists="lists"></ColumnList>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-
-import ColumnList, { ColumnProps } from '../components/ColumnList.vue'
-
-const testData: Array<ColumnProps> = [
-  {
-    id: 1,
-    title: 'test1的专栏',
-    description: '描述1',
-    avatar: 'https://images.dog.ceo/breeds/bullterrier-staffordshire/n02093256_5139.jpg'
-  },
-  {
-    id: 2,
-    title: 'test2的专栏',
-    description: '描述2',
-    avatar: 'https://images.dog.ceo/breeds/clumber/n02101556_5137.jpg'
-  },
-  {
-    id: 3,
-    title: 'test2的专栏',
-    description: '描述2',
-    avatar: 'https://images.dog.ceo/breeds/clumber/n02101556_5137.jpg'
-  },
-  {
-    id: 4,
-    title: 'test2的专栏',
-    description: '描述2',
-    avatar: 'https://images.dog.ceo/breeds/clumber/n02101556_5137.jpg'
-  },
-  {
-    id: 5,
-    title: 'test2的专栏',
-    description: '描述2',
-    avatar: 'https://images.dog.ceo/breeds/clumber/n02101556_5137.jpg'
-  }
-]
+import { computed, defineComponent } from 'vue'
+import { useStore } from 'vuex'
+import ColumnList from '../components/ColumnList.vue'
+import { GlobalDataProps } from '../store'
 
 export default defineComponent({
   name: 'Home',
   components: { ColumnList },
   setup() {
+    const store = useStore<GlobalDataProps>()
+    const list = computed(() => store.state.columns)
     return {
-      lists: testData
+      lists: list
     }
   }
 })

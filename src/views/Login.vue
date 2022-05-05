@@ -20,7 +20,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
-
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '../store'
 import ValidateInput, { RulesProp } from '../components/ValidateInput.vue'
 import ValidateForm from '../components/ValidateForm.vue'
 
@@ -40,9 +41,11 @@ export default defineComponent({
     const passwordVal = ref('123')
     const passwordRules: RulesProp = [{ type: 'required', message: '密码不能为空' }]
 
+    const store = useStore<GlobalDataProps>()
     const onFormSubmit = (result: boolean) => {
       console.log(result)
       if (result) {
+        store.commit('login')
         router.replace('/')
       }
     }

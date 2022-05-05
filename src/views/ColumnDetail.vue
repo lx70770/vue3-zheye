@@ -9,15 +9,15 @@
         <p class="text-muted">{{ column.description }}</p>
       </div>
     </div>
-    <PostList :posts="list"/>
+    <PostList :posts="list" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
-
-import { testData, testPosts } from '../testData'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '@/store'
 import PostList from '../components/PostList.vue'
 
 export default defineComponent({
@@ -25,9 +25,10 @@ export default defineComponent({
   components: { PostList },
   setup() {
     const route = useRoute()
+    const store = useStore<GlobalDataProps>()
     const currentId = +route.params.id
-    const column = testData.find(c => c.id === currentId)
-    const list = testPosts.filter(post => post.columnId === currentId)
+    const column = computed(() => store.getters.getColumnById(currentId))
+    const list = computed(() => store.getters.getPostsByid(currentId))
 
     return { column, list }
   }

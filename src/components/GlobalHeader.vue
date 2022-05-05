@@ -8,9 +8,9 @@
     <ul v-else class="list-inline">
       <li class="list-inline-item">
         <Dropdown :title="`你好 ${user.name}`">
-          <DropdownItem><a to="/create" class="dropdown-item">新建文章</a></DropdownItem>
+          <DropdownItem><router-link to="/create" class="dropdown-item">新建文章</router-link></DropdownItem>
           <!-- <DropdownItem><a :to="`/column/${user.column}`" class="DropdownItem">我的专栏</a></DropdownItem> -->
-          <DropdownItem disabled><a href="#" class="dropdown-item">编辑资料</a></DropdownItem>
+          <DropdownItem disabled><a to="#" class="dropdown-item">编辑资料</a></DropdownItem>
           <DropdownItem><a href="#" class="dropdown-item">退出登陆</a></DropdownItem>
         </Dropdown>
       </li>
